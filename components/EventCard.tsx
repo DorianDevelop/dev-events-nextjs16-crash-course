@@ -3,9 +3,18 @@ import Link from "next/link";
 import Image from "next/image";
 import {EventItem} from "@/lib/constants";
 
+/**
+ * Card preview for a single event.
+ *
+ * Accessibility:
+ * - Uses Next.js Image for optimized images and includes meaningful alt text.
+ * - The entire card is a focusable link to the event details page.
+ */
+
 const EventCard = ({title, image, slug, location, date, time} : EventItem) => {
     return (
         <Link href={`/events/${slug}`} id={"event-card"}>
+            {/* Thumbnail. Consider adding sizes for responsive layouts if this evolves. */}
             <Image src={image} alt={title} width={410} height={300}/>
             <div className="flex flex-row gap-2">
                 <Image src={"/icons/pin.svg"} alt={"location"} width={14} height={14}/>
