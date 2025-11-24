@@ -1,17 +1,14 @@
 import React from 'react'
 import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
-import events from "@/lib/constants";
+import {IEvent} from "@/database";
 
-/**
- * Home page
- *
- * Static page that renders a hero and a small list of featured events.
- * In a real app, you might fetch events from a database or API route instead
- * of importing static constants.
- */
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const Page = () => {
+const Page = async () => {
+    const response = await fetch(`${BASE_URL}/api/events`);
+    const { events } = await response.json();
+
     return (
         <section>
             {/* Hero heading */}
@@ -24,7 +21,7 @@ const Page = () => {
                 <h3>Featured Events</h3>
                 {/* Render a small, static list. In production, prefer stable unique keys (e.g., event.id) */}
                 <ul className="events">
-                    {events.map((event) => (
+                    {events && events.length > 0 && events.map((event : IEvent) => (
                         <EventCard key={event.title} {...event} />
                     ))}
                 </ul>
