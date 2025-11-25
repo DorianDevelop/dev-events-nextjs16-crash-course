@@ -22,7 +22,9 @@ const Page = async () => {
                 {/* Render a small, static list. In production, prefer stable unique keys (e.g., event.id) */}
                 <ul className="events">
                     {events && events.length > 0 && events.map((event : IEvent) => (
-                        <EventCard key={event.title} {...event} />
+                        <li key={event.title} className={"list-none"}>
+                            <EventCard key={event.title} {...event} />
+                        </li>
                     ))}
                 </ul>
             </div>
